@@ -1,0 +1,20 @@
+#!/bin/bash
+
+xloc=$(xdotool getmouselocation | cut -f2 -d":" | cut -f1 -d" ")
+yloc=$(xdotool getmouselocation | cut -f3 -d":" | cut -f1 -d" ")
+run=$(echo -e "copy\\nman\\nopen" | dmenu -l 4 -w 100 -x $xloc -y $yloc)
+
+case "$run" in
+"copy")
+    echo "$1" | xclip -sel clip
+   #gnome-terminal
+   ;;
+"man")
+    st -e man $1
+   ;;
+"open")
+   xdg-open $1
+   ;;
+\*)
+   echo default option
+esac
