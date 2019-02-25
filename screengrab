@@ -1,7 +1,10 @@
 #!/bin/bash
 
-if [[ -z $1 ]]; then
-    echo "Usage: screengrab filename"
-fi
+directory=~/Pictures/screengrabs
+mkdir -p $directory
+now=`date '+%Y_%m_%d-%H:%M:%S'`
+filename="$now.jpg"
 
-xwd -root -display :0 | convert xwd:- jpg:- > screenshot.jpg
+xwd -root -display :0 | convert xwd:- jpg:- > $directory/$filename 
+
+notify-send "Screengrab successful" "See ~/Pictures/screengrabs" --icon=$directory/$filename
