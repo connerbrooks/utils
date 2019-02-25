@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+    echo "Usage: screengrab filename"
+fi
+
+xwd -root -display :0 | convert xwd:- jpg:- > screenshot.jpg
